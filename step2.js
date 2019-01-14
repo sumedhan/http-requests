@@ -1,12 +1,11 @@
 var https = require('https');
 
-// Gets and prints chunks of the file
-function getAndPrintHTMLChunks () {
+function getAndPrintHTML () {
 
     // Defines the options for the request
     var requestOptions = {
         hostname: 'sytantris.github.io',
-        path: '/http-examples/step1.html'
+        path: '/http-examples/step2.html'
     };
 
     //Calls the https library 
@@ -15,13 +14,17 @@ function getAndPrintHTMLChunks () {
             console.log('Error status code: ', response.statusCode);
             return 0;
         }
-
+        
+        let content = '';
         response.setEncoding('utf-8');
         response.on('data', function (chunk) {
-            //Logs each of the data chunks as they come in
-            console.log(chunk + '\n');
+            //Appends chunk to content
+            content += chunk;
+        });
+        response.on('end', function() {
+            console.log(content);
         });
     });
 }
 
-getAndPrintHTMLChunks();
+getAndPrintHTML();
