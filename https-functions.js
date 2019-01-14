@@ -1,5 +1,7 @@
 module.exports = function getHTML (options, callback) {
 
+    var https = require('https');
+
     https.get(options, function(response) {
         if(response.statusCode !== 200) {
             console.log('Error status code: ', response.statusCode);
